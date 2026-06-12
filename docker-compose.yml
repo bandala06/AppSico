@@ -1,57 +1,42 @@
 services:
-  # 1. Base de Datos PostgreSQL
-  db:
-    image: postgres:15
-    container_name: postgres_db
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456 # <-- Cambia esto por una contraseña real
-      POSTGRES_DB: sistema_psicologia
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      # Monta tu archivo exacto para que se ejecute al inicializar la BD
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
-    restart: unless-stopped
-
-  # 2. Tu Backend Node.js
   backend:
-    build: 
-      context: ./backend_psicologia # Apunta a la carpeta que me mostraste
+    build:
+      context: ./backend_psicologia
     container_name: app_backend
     ports:
-      - "3000:3000" # Cambia el 3000 izquierdo si tu server.js usa otro puerto
-    environment:
-      # Estas variables las podrás leer en tu backend con process.env
-      - DB_HOST=db       
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASSWORD=123456
-      - DB_NAME=sistema_psicologia
+      - "3000:3000"
     depends_on:
       - db
-    # Útil para desarrollo: refleja los cambios de tu código sin reconstruir la imagen
     volumes:
       - ./backend_psicologia:/app
       - /app/node_modules
 
-  # 3. Tu Frontend React (Create React App)
   frontend:
-    build: 
+    build:
       context: ./frontend_psicologia
     container_name: app_frontend
     ports:
-      # Mapeamos el puerto 3001 de tu PC al 3000 del contenedor para evitar choques
-      - "3001:3000" 
-    environment:
-      # En CRA, TODAS las variables de entorno personalizadas DEBEN empezar con REACT_APP_
-      - REACT_APP_API_URL=http://localhost:3000 
+      - "3001:3000"
     depends_on:
       - backend
-    # Mapeo de volúmenes para hot-reload (ver tus cambios al guardar)
     volumes:
       - ./frontend_psicologia:/app
       - /app/node_modules
+
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: sistema_psicologia
+      TZ: America/Mexico_City
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_v2:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d
+
 volumes:
-   postgres_data:
+  postgres_data_v2:

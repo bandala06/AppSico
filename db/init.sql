@@ -12,7 +12,7 @@
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
-SET transaction_timeout = 0;
+--SET transaction_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -345,7 +345,7 @@ ALTER TABLE ONLY psicologia.usuarios ALTER COLUMN id SET DEFAULT nextval('psicol
 --
 
 COPY psicologia.administradores (id, no_control, nombre, apellido, email, password, rol) FROM stdin;
-3	100	Admin	Principal	admin@psicologia.edu	$2b$10$f3Va092xxwlzqP5gZpZhte38m2RVJderkB1F3RP.N9sgOVKjwnCk6	admin
+3	100	Admin	Principal	admin@psicologia.edu	123456	admin
 \.
 
 
@@ -378,16 +378,16 @@ COPY psicologia.expediente (id, no_control, numero_sesiones, motivo_consulta, de
 --
 
 COPY psicologia.usuario (no_control, nombre, apellido, sexo, edad, estado_civil, direccion, telefono, ingenieria, modalidad, semestre, fecha_registro, email, password, rol) FROM stdin;
-99999999	Test	User	masculino	25	soltero	test 123	1234567890	isc	escolarizado	5	2024-02-04	test999@test.com	$2a$10$gO2ZghUjvgTZoVvgTslQYuHgHLlamuVj0mjvJWg7/YVMfopJdg3/a	usuario
-22940058	Luis	Carmona	masculino	23	casado	test	1234567890	isc	escolarizado	8	2024-02-04	luis@gmail.com	$2a$10$voqjisvpgngx7L48qdbt4.VCBnVfh7Onq.x5NtNCTxOibw.Eirgkq	usuario
-22940028	Lore	Carmona	femenino	22	casado	2ce	1234567899	iem	escolarizado	6	2026-03-09	lorena@gmail.com	$2a$10$f8lBLtrqkJmQ2vXHgApiRu.Pyd/kwK2v6ZOn5.TL399/uZUjqWTC2	usuario
-22940033	juan	gonzales	masculino	21	soltero	xxxxx	1234567890	isc	escolarizado	8	2026-02-04	juan@gmail.com	$2a$10$wvxNRaMqa3S5VnLaU1GpxOMGXESqMmpRbSGsbOeOvGVTrhChpqz8O	usuario
-22940021	michel	betancourt lopez	femenino	21	soltero	sin direccion	1234567891	isc	escolarizado	8	2026-02-09	michel@gmail.com	$2a$10$yYV2XUZpEQbFeyfJqN5kUO5q.L9QBk7ZM.79SuY2k58risGfbqtEi	usuario
-22940022	Sarah	betancourt lopez	femenino	21	soltero	sin direccion	1234567891	isc	escolarizado	9	2026-02-04	sarah@gmail.com	$2a$10$ixhTCXZOxtdvhjYiCrf1beyrg3pqhf3ZlUy1Q3TdE2RXZnMa5uJZu	usuario
-22940050	Gaby	perez	femenino	21	soltero	zazaza	2761335243	iia	escolarizado	5	2026-04-09	gaby@gmail.com	$2a$10$LQwpx/1Koe3Qy2kPVHrPuOP2VRaxLYYgo5kmp1.0dgGg8J5hYxk/6	usuario
-22940010	Sam	Lopez	masculino	20	soltero	hihihi	1234567895	iias	escolarizado	6	2026-02-09	sam@gmail.com	$2a$10$SJQ.aaIUYNLIjEEY8Xxmae2qdTYa0oQESvt4o/uZj6b/OWmdZi3V2	usuario
+99999999	Test	User	masculino	25	soltero	test 123	1234567890	isc	escolarizado	5	2024-02-04	test999@test.com	123456	usuario
+22940058	Luis	Carmona	masculino	23	casado	test	1234567890	isc	escolarizado	8	2024-02-04	luis@gmail.com	123456	usuario
+22940028	Lore	Carmona	femenino	22	casado	2ce	1234567899	iem	escolarizado	6	2026-03-09	lorena@gmail.com	123456	usuario
+22940033	juan	gonzales	masculino	21	soltero	xxxxx	1234567890	isc	escolarizado	8	2026-02-04	juan@gmail.com	123456	usuario
+22940021	michel	betancourt lopez	femenino	21	soltero	sin direccion	1234567891	isc	escolarizado	8	2026-02-09	michel@gmail.com	123456	usuario
+22940022	Sarah	betancourt lopez	femenino	21	soltero	sin direccion	1234567891	isc	escolarizado	9	2026-02-04	sarah@gmail.com	123456	usuario
+22940050	Gaby	perez	femenino	21	soltero	zazaza	2761335243	iia	escolarizado	5	2026-04-09	gaby@gmail.com	123456	usuario
+22940010	Sam	Lopez	masculino	20	soltero	hihihi	1234567895	iias	escolarizado	6	2026-02-09	sam@gmail.com	123456	usuario
 22940024	Lorely	Carmona Vazquez	Femenino	21	Soltera	XXXXX	2761335243	Sistemas Computacionales	Escolarizada	8	\N	22940024@itt.edu	123456	usuario
-22940030	sam	lopez	femenino	34	casado	lkasjddkj	1987365268	iia	escolarizado	5	2026-02-09	lopez@gmail.com	$2a$10$bxgdeHDKsHC.QNSsv2JZkeaUf./nwRo2hxmAWBeeuw44zuyKgezLa	usuario
+22940030	sam	lopez	femenino	34	casado	lkasjddkj	1987365268	iia	escolarizado	5	2026-02-09	lopez@gmail.com	123456	usuario
 \.
 
 
@@ -398,7 +398,7 @@ COPY psicologia.usuario (no_control, nombre, apellido, sexo, edad, estado_civil,
 --
 
 COPY psicologia.usuarios (id, email, nombre, apellido, telefono, imagen, password, is_available, session_token, created_at, updated_at) FROM stdin;
-1	admin@example.com	Manuel	Hernandez	99946464	\N	$2y$10$92IXUNpkjO0rOQ5byMi	\N	\N	2021-01-14 12:00:00	2021-01-14 12:00:00
+1	admin@example.com	Manuel	Hernandez	99946464	\N	123456	\N	\N	2021-01-14 12:00:00	2021-01-14 12:00:00
 \.
 
 
