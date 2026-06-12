@@ -1,0 +1,57 @@
+.form-expediente {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  border-radius: 8px;
+  margin: 20px auto;
+  width: 100%;
+}
+
+/* Título principal 
+.form-expediente h1 {
+  text-align: center;
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}*/
+
+/* Título secundario */
+.form-expediente h2 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.formegrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+/* Estilo de las etiquetas de los campos */
+.form-expediente label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Estilo para los campos de solo lectura */
+input[readonly] {
+  border: 2px solid #787b7b;
+  background-color: #00000004;
+  cursor: not-allowed;
+}
+
+/* Estilo del botón de envío */
+input[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  background-color: #326273;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
